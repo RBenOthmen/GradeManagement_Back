@@ -13,13 +13,18 @@ public class Module implements Serializable {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @OneToMany(mappedBy = "module")
+    private String name;
+
+    @OneToMany(mappedBy = "module", cascade = CascadeType.PERSIST) // Cascade the save operation to associated subjects
     private List<Subject> subjects = new ArrayList<>();
 
     @ManyToMany(mappedBy = "modules")
     private List<Student> students = new ArrayList<>();
 
-    public Module(List<Subject> subjects) {}
+    public Module(String name, List<Subject> subjects) {
+        this.name = name;
+        this.subjects = subjects;
+    }
 
     public Module() {}
 
@@ -34,6 +39,14 @@ public class Module implements Serializable {
 
     public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void calculMoyenne() {}

@@ -18,19 +18,23 @@ public class Student implements Serializable {
     private String first_name;
     private String last_name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST) // Cascade the save operation to associated modules
     private List<Module> modules = new ArrayList<>();
 
     private double moyenneGenerale;
 
 
-    public Student(String first_name, String last_name) {
+    public Student(String first_name, String last_name, List<Module> modules) {
         this.first_name = first_name;
         this.last_name = last_name;
+        this.modules = modules;
     }
 
     public Student() {}
 
+    public Long getId() {
+        return id;
+    }
 
     public String getFirst_name() {
         return first_name;
@@ -54,5 +58,9 @@ public class Student implements Serializable {
 
     public void setModules(List<Module> modules) {
         this.modules = modules;
+    }
+
+    public double getMoyenneGenerale() {
+        return moyenneGenerale;
     }
 }

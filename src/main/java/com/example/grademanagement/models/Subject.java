@@ -13,6 +13,7 @@ public class Subject {
     private Long id;
     private String name;
     private int coefficient;
+    private double grade;
 
     @ManyToOne
     @JoinColumn(name = "module_id")
@@ -21,13 +22,13 @@ public class Subject {
     @ManyToMany(mappedBy = "subjects")
     private List<Teacher> teachers = new ArrayList<>();
 
-    public Subject(String name, int coefficient) {
+    public Subject(String name, int coefficient, double grade) {
         this.name = name;
         this.coefficient = coefficient;
+        this.grade = grade;
     }
 
     public Subject() {}
-
 
     public Long getId() {
         return id;
@@ -49,4 +50,11 @@ public class Subject {
         this.coefficient = coefficient;
     }
 
+    public double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
 }
