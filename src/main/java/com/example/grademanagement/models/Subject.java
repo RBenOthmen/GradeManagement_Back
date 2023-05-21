@@ -14,13 +14,12 @@ public class Subject {
     private String name;
     private int coefficient;
     private double grade;
-
     @ManyToOne
     @JoinColumn(name = "module_id")
     private Module module;
-
     @ManyToMany(mappedBy = "subjects")
     private List<Teacher> teachers = new ArrayList<>();
+
 
     public Subject(String name, int coefficient, double grade) {
         this.name = name;
@@ -56,5 +55,9 @@ public class Subject {
 
     public void setGrade(double grade) {
         this.grade = grade;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
     }
 }

@@ -15,19 +15,23 @@ public class Module implements Serializable {
 
     private String name;
 
-    @OneToMany(mappedBy = "module", cascade = CascadeType.PERSIST) // Cascade the save operation to associated subjects
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) // Cascade the save operation to associated subjects
     private List<Subject> subjects = new ArrayList<>();
 
     @ManyToMany(mappedBy = "modules")
     private List<Student> students = new ArrayList<>();
 
+
     public Module(String name, List<Subject> subjects) {
         this.name = name;
         this.subjects = subjects;
+
+        for (Subject subject : subjects) {
+            subject.setModule(this);
+        }
     }
 
     public Module() {}
-
 
     public Long getId() {
         return id;
@@ -50,4 +54,9 @@ public class Module implements Serializable {
     }
 
     public void calculMoyenne() {}
+
+    public void addSubject(Subject subject) {
+        subjects.add(subject);
+        subject.setModule(this);
+    }
 }

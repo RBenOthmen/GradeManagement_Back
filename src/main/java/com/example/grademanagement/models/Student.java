@@ -18,7 +18,7 @@ public class Student implements Serializable {
     private String first_name;
     private String last_name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST) // Cascade the save operation to associated modules
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST) // Cascade the save operation to associated modules
     private List<Module> modules = new ArrayList<>();
 
     private double moyenneGenerale;
